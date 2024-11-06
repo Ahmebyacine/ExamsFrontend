@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/ExamsFrontend/static/css/main.dbbea2a5.css",
+    "main.js": "/ExamsFrontend/static/js/main.d809a1b7.js",
+    "static/js/453.f7be5b23.chunk.js": "/ExamsFrontend/static/js/453.f7be5b23.chunk.js",
+    "index.html": "/ExamsFrontend/index.html",
+    "main.dbbea2a5.css.map": "/ExamsFrontend/static/css/main.dbbea2a5.css.map",
+    "main.d809a1b7.js.map": "/ExamsFrontend/static/js/main.d809a1b7.js.map",
+    "453.f7be5b23.chunk.js.map": "/ExamsFrontend/static/js/453.f7be5b23.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.dbbea2a5.css",
+    "static/js/main.d809a1b7.js"
+  ]
+}
