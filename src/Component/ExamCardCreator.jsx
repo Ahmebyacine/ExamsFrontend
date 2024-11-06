@@ -170,13 +170,18 @@ export default function ExamCardCreator() {
               </select>
             </div>
             )}
-            <button
-              type="button"
-              onClick={() => handleRemoveSection(sectionIndex)}
-              className="text-sm text-red-600 hover:text-red-800 mt-4"
-            >
-              Remove Section {sectionIndex+1}
-            </button>
+           {
+             sectionIndex !== 0 && (
+               <button
+                 type="button"
+                 onClick={() => handleRemoveSection(sectionIndex)}
+                 className="text-sm text-red-600 hover:text-red-800 mt-4"
+               >
+                 Remove Section {sectionIndex + 1}
+               </button>
+             )
+           }
+            
           </div>
         ))}
 
