@@ -4,7 +4,7 @@ import React, { createContext, useContext, useState } from 'react';
 // Create the context for form data
 const FormContext = createContext();
 
-// Create a custom hook to use form data context
+// Custom hook to use form data context
 export const useFormContext = () => {
   return useContext(FormContext);
 };
@@ -12,11 +12,22 @@ export const useFormContext = () => {
 // FormProvider to manage form data
 export const FormProvider = ({ children }) => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    username: '',
-    password: '',
+    level: '',
+    Trimester: '',
+    material: '',
+    unit: '',
+    difficulty: '',
   });
+
+  // sections state moved here
+  const [sections, setSections] = useState([
+    {
+      content: '',
+      questions: [{ question: '', answer: '' }],
+      image: null,
+      imagePosition: 'top-left',
+    },
+  ]);
 
   const handleChange = (field, value) => {
     setFormData((prevData) => ({
@@ -26,7 +37,7 @@ export const FormProvider = ({ children }) => {
   };
 
   return (
-    <FormContext.Provider value={{ formData, handleChange }}>
+    <FormContext.Provider value={{ formData, handleChange, sections, setSections }}>
       {children}
     </FormContext.Provider>
   );

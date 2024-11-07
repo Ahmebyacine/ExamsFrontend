@@ -1,19 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useFormContext } from './FormContext';
 
 export default function ExamCardCreator() {
-  const [sections, setSections] = useState([
-    {
-      content: '',
-      questions: [{ question: '', answer: '' }],
-      image: null,
-      imagePosition: 'top-left'
-    }
-  ]);
+  const { formData, sections, setSections } = useFormContext();
+
   const positionOptions = [
     { label: 'Top Left', value: 'top-left' },
     { label: 'Top Right', value: 'top-right' },
     { label: 'Bottom Left', value: 'bottom-left' },
-    { label: 'Bottom Right', value: 'bottom-right' }
+    { label: 'Bottom Right', value: 'bottom-right' },
   ];
 
   const handleSectionChange = (index, field, value) => {
@@ -73,7 +68,7 @@ export default function ExamCardCreator() {
   const handleAddSection = () => {
     setSections([
       ...sections,
-      { content: '', questions: [{ question: '', answer: '' }], image: null, imagePosition: { top: 0, left: 0 } }
+      { content: '', questions: [{ question: '', answer: '' }], image: null, imagePosition: 'top-left' },
     ]);
   };
 
@@ -83,16 +78,16 @@ export default function ExamCardCreator() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(sections);
+    console.log({ formData, sections });
     // Send this data to your backend or state management system
   };
 
   return (
-    <div className="max-w-2xl mx-auto my-10 p-8 bg-white rounded-lg shadow-lg">
+    <div className="mx-auto my-10 py-8 bg-white rounded-lg">
       <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Create Exam Questions</h2>
       <form onSubmit={handleSubmit} className="space-y-8">
         {sections.map((section, sectionIndex) => (
-          <div key={sectionIndex} className="space-y-6 bg-gray-50 p-4 rounded-lg shadow-inner">
+          <div key={sectionIndex} className="space-y-6 rounded-lg shadow-inner">
             <div>
               <h1 className='text-xl font-bold text-center'>section {sectionIndex+1}</h1>
               <label className="block text-sm font-medium text-gray-700 mb-2">Content:</label>
@@ -104,7 +99,7 @@ export default function ExamCardCreator() {
                 placeholder="Enter content"
               />
             </div>
-
+  
             {section.questions.map((q, questionIndex) => (
               <div key={questionIndex} className="space-y-4">
                 <div>
@@ -136,7 +131,7 @@ export default function ExamCardCreator() {
                 </button>
               </div>
             ))}
-
+  
             <button
               type="button"
               onClick={() => handleAddQuestion(sectionIndex)}
@@ -144,7 +139,7 @@ export default function ExamCardCreator() {
             >
               Add Question {section.questions.length+1}
             </button>
-
+  
             <div className="mt-4">
               <label className="block text-sm font-medium text-gray-700 mb-2">Upload Image:</label>
               <input
@@ -184,7 +179,7 @@ export default function ExamCardCreator() {
             
           </div>
         ))}
-
+  
         <button
           type="button"
           onClick={handleAddSection}
@@ -192,13 +187,8 @@ export default function ExamCardCreator() {
         >
           Add Section
         </button>
-        <button
-          type="submit"
-          className="w-full py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out"
-        >
-          Save Exam
-        </button>
       </form>
     </div>
   );
+  
 }

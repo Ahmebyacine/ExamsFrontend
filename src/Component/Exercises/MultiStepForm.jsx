@@ -1,15 +1,16 @@
 // Component.js
 import React, { useState } from 'react';
 import { FormProvider } from './FormContext';
-import PersonalInfo from './PersonalInfo';
-import AccountDetails from './AccountDetails';
+import GenralInfo from './GenralInfo';
+import materialDetails from './materialDetails';
 import Confirmation from './Confirmation';
+import ExerciseDetails from './ExerciseDetails';
 
 const Component = () => {
   const [currentStep, setCurrentStep] = useState(0);
 
   const nextStep = () => {
-    setCurrentStep((prev) => Math.min(prev + 1, 2));
+    setCurrentStep((prev) => Math.min(prev + 1, 3));
   };
 
   const prevStep = () => {
@@ -17,8 +18,9 @@ const Component = () => {
   };
 
   const steps = [
-    { title: 'Personal Information', component: PersonalInfo },
-    { title: 'Account Details', component: AccountDetails },
+    { title: 'Genral Information', component: GenralInfo },
+    { title: 'Material Details', component: materialDetails },
+    { title: 'Execrise Details', component: ExerciseDetails },
     { title: 'Confirmation', component: Confirmation },
   ];
 
