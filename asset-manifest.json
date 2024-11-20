@@ -1,16 +1,15 @@
 {
   "files": {
-    "main.css": "/ExamsFrontend/static/css/main.5c94a66a.css",
-    "main.js": "/ExamsFrontend/static/js/main.bac6b28b.js",
+    "main.css": "/ExamsFrontend/static/css/main.88f64073.css",
+    "main.js": "/ExamsFrontend/static/js/main.3c8e7b2c.js",
     "static/js/453.f7be5b23.chunk.js": "/ExamsFrontend/static/js/453.f7be5b23.chunk.js",
-    "static/media/examimg.webp": "/ExamsFrontend/static/media/examimg.2fb766e62168be903aea.webp",
     "index.html": "/ExamsFrontend/index.html",
-    "main.5c94a66a.css.map": "/ExamsFrontend/static/css/main.5c94a66a.css.map",
-    "main.bac6b28b.js.map": "/ExamsFrontend/static/js/main.bac6b28b.js.map",
+    "main.88f64073.css.map": "/ExamsFrontend/static/css/main.88f64073.css.map",
+    "main.3c8e7b2c.js.map": "/ExamsFrontend/static/js/main.3c8e7b2c.js.map",
     "453.f7be5b23.chunk.js.map": "/ExamsFrontend/static/js/453.f7be5b23.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.5c94a66a.css",
-    "static/js/main.bac6b28b.js"
+    "static/css/main.88f64073.css",
+    "static/js/main.3c8e7b2c.js"
   ]
 }
