@@ -1,66 +1,56 @@
 // AccountDetails.js
 import React from 'react';
+import difficulty from '../../../../Data/difficulty';
+import { useLanguage } from '../../../utils/LanguageContext';
 import { useFormContext } from './FormContext';
 
 const MaterialDetails = ({ onNext, onPrev }) => {
+  const { t } = useLanguage();
   
-  const { formData, handleChange } = useFormContext();
-
-  const materials = [
-    { label: 'math', value: 'math' },
-    { label: 'physique', value: 'physique' },
-    { label: 'chemical', value: 'chemical' }
-  ];
-  const units = [
-    { label: 'unit 1', value: 'unit1' },
-    { label: 'unit 2', value: 'unit2' },
-    { label: 'unit 3', value: 'unit3' }
-  ];
-  const difficulty = [
-    { label: '1', value: '1' },
-    { label: '2', value: '2' },
-    { label: '3', value: '3' }
-  ];
-
+  const { formData, handleChange,filteredMatriels, filteredUnits,setSelectedMatriel } = useFormContext();
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-4">Material Details</h2>
+      <h2 className="text-2xl font-bold mb-4">{t("Material_Details")}</h2>
       <div className="mb-4">
-        <label className="block text-sm font-bold text-gray-700 mb-2">Select material:</label>
+        <label className="block text-sm font-bold text-gray-700 mb-2">{t("Select_material")}:</label>
         <select
-          onChange={(e) => handleChange('material', e.target.value)}
+          onChange={(e)=> {
+            const value =e.target.value;
+            handleChange('material',value);
+            setSelectedMatriel(value);
+          }}
           className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
           value={formData.material}
         >
-          {materials.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
+          {filteredMatriels.map((option) => (
+            <option key={option._id} value={option._id}>
+              {option.name}
             </option>
           ))}
         </select>
       </div>
       <div className="mb-4">
-        <label className="block text-sm font-bold text-gray-700 mb-2">Select unit:</label>
+        <label className="block text-sm font-bold text-gray-700 mb-2">{t("Select_unit")}:</label>
         <select
           onChange={(e) => handleChange('unit', e.target.value)}
           className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
         >
-          {units.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
+          {filteredUnits.map((option) => (
+            <option key={option._id} value={option._id}>
+              {option.name}
             </option>
           ))}
         </select>
       </div>
       <div className="mb-4">
-        <label className="block text-sm font-bold text-gray-700 mb-2">Select difficulty:</label>
+        <label className="block text-sm font-bold text-gray-700 mb-2">{t("Select_difficulty")}:</label>
         <select
           onChange={(e) => handleChange('difficulty', e.target.value)}
           className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
         >
           {difficulty.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
+            <option key={option} value={option}>
+              {option}
             </option>
           ))}
         </select>
@@ -70,13 +60,13 @@ const MaterialDetails = ({ onNext, onPrev }) => {
           onClick={onPrev}
           className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         >
-          Previous
+          {t("Previous")}
         </button>
         <button
           onClick={onNext}
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         >
-          Next
+          {t("Next")}
         </button>
       </div>
     </div>

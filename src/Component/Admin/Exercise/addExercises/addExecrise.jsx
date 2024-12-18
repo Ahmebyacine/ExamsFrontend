@@ -1,12 +1,13 @@
-// Component.js
 import React, { useState } from 'react';
 import { FormProvider } from './FormContext';
 import GenralInfo from './GenralInfo';
 import materialDetails from './materialDetails';
 import Confirmation from './Confirmation';
 import ExerciseDetails from './ExerciseDetails';
+import {useLanguage} from '../../../utils/LanguageContext'
 
-const Component = () => {
+const AddExecrise = () => {
+  const { t } = useLanguage();
   const [currentStep, setCurrentStep] = useState(0);
 
   const nextStep = () => {
@@ -18,9 +19,9 @@ const Component = () => {
   };
 
   const steps = [
-    { title: 'Genral Information', component: GenralInfo },
-    { title: 'Material Details', component: materialDetails },
-    { title: 'Execrise Details', component: ExerciseDetails },
+    { title: 'Genral_Information', component: GenralInfo },
+    { title: 'Material_Details', component: materialDetails },
+    { title: 'Execrise_Details', component: ExerciseDetails },
     { title: 'Confirmation', component: Confirmation },
   ];
 
@@ -31,8 +32,8 @@ const Component = () => {
 
   return (
     <FormProvider>
-      <div className="md:max-w-2xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold mb-4">Exercise Details</h2>
+      <div className="md:w-2/3 mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
+        <h2 className="text-2xl font-bold mb-4">{t("Exercise_Details")}</h2>
         <div className="mb-8">
           <div className="flex justify-between mb-2">
             {steps.map((step, index) => (
@@ -40,7 +41,7 @@ const Component = () => {
                 key={index}
                 className={`text-sm font-medium ${index <= currentStep ? 'text-blue-600' : 'text-gray-400'}`}
               >
-                {step.title}
+                {t(step.title)}
               </div>
             ))}
           </div>
@@ -58,4 +59,4 @@ const Component = () => {
   );
 };
 
-export default Component;
+export default AddExecrise;
