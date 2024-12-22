@@ -1,21 +1,16 @@
 {
   "files": {
-    "main.css": "/ExamsFrontend/static/css/main.d21cc51d.css",
-    "main.js": "/ExamsFrontend/static/js/main.c844b265.js",
-    "static/js/239.75367b6d.chunk.js": "/ExamsFrontend/static/js/239.75367b6d.chunk.js",
-    "static/js/213.b55d0d15.chunk.js": "/ExamsFrontend/static/js/213.b55d0d15.chunk.js",
-    "static/js/732.758ff4b2.chunk.js": "/ExamsFrontend/static/js/732.758ff4b2.chunk.js",
-    "static/js/453.f7be5b23.chunk.js": "/ExamsFrontend/static/js/453.f7be5b23.chunk.js",
+    "main.css": "/ExamsFrontend/static/css/main.ad86661b.css",
+    "main.js": "/ExamsFrontend/static/js/main.6bc6298f.js",
+    "static/js/453.9537af23.chunk.js": "/ExamsFrontend/static/js/453.9537af23.chunk.js",
+    "static/media/Tajwal.ttf": "/ExamsFrontend/static/media/Tajwal.e4ac0a5abb7d379e2308.ttf",
     "index.html": "/ExamsFrontend/index.html",
-    "main.d21cc51d.css.map": "/ExamsFrontend/static/css/main.d21cc51d.css.map",
-    "main.c844b265.js.map": "/ExamsFrontend/static/js/main.c844b265.js.map",
-    "239.75367b6d.chunk.js.map": "/ExamsFrontend/static/js/239.75367b6d.chunk.js.map",
-    "213.b55d0d15.chunk.js.map": "/ExamsFrontend/static/js/213.b55d0d15.chunk.js.map",
-    "732.758ff4b2.chunk.js.map": "/ExamsFrontend/static/js/732.758ff4b2.chunk.js.map",
-    "453.f7be5b23.chunk.js.map": "/ExamsFrontend/static/js/453.f7be5b23.chunk.js.map"
+    "main.ad86661b.css.map": "/ExamsFrontend/static/css/main.ad86661b.css.map",
+    "main.6bc6298f.js.map": "/ExamsFrontend/static/js/main.6bc6298f.js.map",
+    "453.9537af23.chunk.js.map": "/ExamsFrontend/static/js/453.9537af23.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d21cc51d.css",
-    "static/js/main.c844b265.js"
+    "static/css/main.ad86661b.css",
+    "static/js/main.6bc6298f.js"
   ]
 }
