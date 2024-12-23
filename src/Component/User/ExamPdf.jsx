@@ -1,10 +1,8 @@
 import { useState} from "react";
-import jsPDF from "jspdf";
-import {generatePdfWithArabic, calculateImageDimensions, addContentToPdf, addQuestionsToPdf, addImages, AddPageNumbers } from "../utils/pdfUtils";
 import {Download } from 'lucide-react';
-import { isRTL} from '../utils/detectArabic'; 
+import { PDFDownloadLink } from '@react-pdf/renderer';
 import Modal from "../UI/Modal";
-import ArabicPDFGenerator from "../UI/ArabicPdfComponent";
+import ExamDocument from "../ToolsPDF/ExamDocument";
 
 const ExamPdf = ({ exercises }) => {
   
@@ -14,137 +12,9 @@ const ExamPdf = ({ exercises }) => {
   const [matriel, setMatriel] = useState("اللغة العربية");
   const [trimester, setTrimester] = useState("الفصل الاول");
 
-  const generatePdf = () => {
-    const pdf = new jsPDF();
-    const padding = 10;
-    const pageWidth = pdf.internal.pageSize.width - padding * 2;
-    const pageHeight = pdf.internal.pageSize.height - 10;
-    let yPosition = 60;
-    let exerciseNumber = 1;
-    
-    // Header Statict
-    generatePdfWithArabic(pdf,year,level,matriel,trimester);
-  
-    exercises.forEach((exercise) => {
-      if (yPosition > pageHeight) {
-        pdf.addPage();
-        yPosition = 20;
-      }
-      // Exercise number
-      pdf.setFontSize(14);
-      pdf.setFont("Helvetica", "bold");
-      pdf.text(`Exercise ${exerciseNumber}`, padding, yPosition);
-      yPosition += 10;
-  
-      exercise.exercise.forEach((contentItem) => {
-        if (yPosition > pageHeight) {
-          pdf.addPage();
-          yPosition = 20;
-        } 
-        const textDirection = isRTL(contentItem.content) ? "rtl" : "ltr";
-        const textAlign = textDirection === "rtl" ? "right" : "left";
-         if (textDirection === "rtl") {
-           pdf.setFont("Amiri",'normal');
-         } else {
-           pdf.setFont("Helvetica", "normal");
-         }
-        pdf.setFontSize(12);
-        const xPosition = textAlign === "right" ? pageWidth - padding + 20: padding;
-        if (["left", "right"].includes(contentItem.imagePosition)) {
-          yPosition = handleSideImageLayout(pdf, contentItem, xPosition, pageWidth, yPosition, pageHeight,textAlign);
-        } else {
-          yPosition = handleTopBottomImageLayout(pdf, contentItem, xPosition, pageWidth, yPosition, pageHeight,textAlign);
-        }
-  
-        yPosition += 10;
-      });
-      exerciseNumber++;
-      // Check space after each exercise
-      if (yPosition > pageHeight) {
-        pdf.addPage();
-        yPosition = 10;
-      }
-    });
-
-    AddPageNumbers(pdf);
-    const today = new Date();
-    const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
-    const formattedDate = today.toLocaleDateString('en-US', options);
-    pdf.save(`Exam_${formattedDate}.pdf`);
-  };
-  
-  
-  const handleSideImageLayout = (pdf, contentItem, padding, pageWidth, yPosition,pageHeight,textAlign) => {
-    const targetWidth = 80;
-    const { height: imageHeight } = calculateImageDimensions(contentItem.image, targetWidth);
-    const textWidth = pageWidth - targetWidth - 10;
-  
-    if (contentItem.imagePosition === "left") {
-      if (yPosition > pageHeight) {
-        pdf.addPage();
-        yPosition = 20;
-      }
-      // Draw image on the left
-      pdf.addImage(contentItem.image, "JPEG", padding, yPosition, targetWidth, imageHeight,pageHeight);
-      const textX = padding + targetWidth + 10;
-      yPosition += addContentToPdf(pdf, contentItem.content, textX, yPosition, textWidth,pageHeight,textAlign);
-      yPosition += addQuestionsToPdf(pdf, contentItem.questions, textX, yPosition, textWidth,pageHeight,textAlign);
-    } else {
-      // Draw text first, then image on the right
-      yPosition += addContentToPdf(pdf, contentItem.content, padding, yPosition, textWidth,pageHeight,textAlign);
-      yPosition += addQuestionsToPdf(pdf, contentItem.questions, padding, yPosition, textWidth,pageHeight,textAlign);
-      if (yPosition > pageHeight) {
-        pdf.addPage();
-        yPosition = 20;
-      }
-      pdf.addImages(
-        contentItem.image,
-        "JPEG",
-        padding + textWidth + 10,
-        yPosition - imageHeight,
-        targetWidth,
-        imageHeight,
-        pageHeight
-      );
-    }
-  
-    return yPosition + imageHeight + 10; // Return updated yPosition
-  };
-  
-  const handleTopBottomImageLayout = (pdf, contentItem, padding, pageWidth, yPosition,pageHeight,textAlign) => {
-    let contentWidth = pageWidth;
-    if (contentItem.image && contentItem.secondImage){
-      contentWidth = 0.9 * pageWidth;
-    }else{
-      contentWidth = 0.65 * pageWidth;
-    }
-    const xOffset = (pageWidth - contentWidth + 20) / 2;
-  
-    if (contentItem.imagePosition === "top") {
-      if (yPosition > pageHeight) {
-        pdf.addPage();
-        yPosition = 20;
-      }
-      yPosition = addImages(pdf, contentItem, xOffset, yPosition, contentWidth, pageHeight);
-    }
-    yPosition += addContentToPdf(pdf, contentItem.content, padding, yPosition, pageWidth,pageHeight,textAlign);
-    yPosition += addQuestionsToPdf(pdf, contentItem.questions, padding, yPosition, pageWidth,pageHeight,textAlign);
-  
-    if (contentItem.imagePosition === "bottom") {
-      if (yPosition > pageHeight) {
-        pdf.addPage();
-        yPosition = 20;
-      }
-      yPosition = addImages(pdf, contentItem, xOffset, yPosition, contentWidth, pageHeight);
-    }
-  
-    return yPosition;
-  };
   const handelSubmit =(event)=>{
     event.preventDefault();
-    generatePdf();
   }
-
   return (
     <div>
       <button
@@ -156,7 +26,6 @@ const ExamPdf = ({ exercises }) => {
         </span>
          Download Exercises as PDF
       </button>
-      <ArabicPDFGenerator/>
       {isModalOpen && (
         <Modal onClose={() => setIsModalOpen(false)}>
           <div className="popover-content min-w-80 sm:min-w-[300px] sm:max-w-[600px]">
@@ -220,7 +89,16 @@ const ExamPdf = ({ exercises }) => {
                   type="submit"
                   className="inline-flex items-center justify-center whitespace-nowrap rounded text-sm text-white font-medium ring-offset-background  bg-indigo-700 h-10"
                 >
-                  Download Exam
+                  <PDFDownloadLink document={
+                  <ExamDocument 
+                  exam={exercises}  
+                  year={year} 
+                  level={level} 
+                  material={matriel} 
+                  trimester={trimester} />} 
+                  fileName="exam.pdf">
+                  {({ loading }) => (loading ? 'Loading document...' : 'Download Exam PDF')}
+                  </PDFDownloadLink>
                 </button>
               </form>
             </div>
