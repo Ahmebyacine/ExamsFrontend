@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/ExamsFrontend/static/css/main.ad86661b.css",
-    "main.js": "/ExamsFrontend/static/js/main.6bc6298f.js",
+    "main.js": "/ExamsFrontend/static/js/main.0d3cba3f.js",
     "static/js/453.9537af23.chunk.js": "/ExamsFrontend/static/js/453.9537af23.chunk.js",
-    "static/media/Tajwal.ttf": "/ExamsFrontend/static/media/Tajwal.e4ac0a5abb7d379e2308.ttf",
+    "static/media/adobearabic.ttf": "/ExamsFrontend/static/media/adobearabic.1db15deabaa8028ecba5.ttf",
     "index.html": "/ExamsFrontend/index.html",
     "main.ad86661b.css.map": "/ExamsFrontend/static/css/main.ad86661b.css.map",
-    "main.6bc6298f.js.map": "/ExamsFrontend/static/js/main.6bc6298f.js.map",
+    "main.0d3cba3f.js.map": "/ExamsFrontend/static/js/main.0d3cba3f.js.map",
     "453.9537af23.chunk.js.map": "/ExamsFrontend/static/js/453.9537af23.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ad86661b.css",
-    "static/js/main.6bc6298f.js"
+    "static/js/main.0d3cba3f.js"
   ]
 }
