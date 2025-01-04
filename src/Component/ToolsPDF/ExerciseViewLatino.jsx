@@ -3,9 +3,7 @@ import { Text, View, Image, StyleSheet } from '@react-pdf/renderer';
 const styles = StyleSheet.create({
   content: {
     fontSize: 12,
-    marginBottom: 10,
     fontFamily: 'Amiri',
-    color: 'black',
     whiteSpace: 'pre-wrap',
   },
   list: {
@@ -24,10 +22,6 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     lineHeight: 1.6,
   },
-  image: {
-    width: '70%',
-    marginHorizontal: 'auto',
-  },
   towImage: {
     width: '50%',
   },
@@ -45,8 +39,21 @@ const styles = StyleSheet.create({
   },
   flexColReverse: {
     flexDirection: 'column-reverse',
-    marginBottom: 10,
   },
+  imageContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    margin:5,
+  },
+  singleImage: {
+    width: '70%',
+    marginHorizontal: 'auto',
+  },
+  doubleImage: {
+    width: '50%',
+    marginVertical: 'auto',
+  },
+  image: {},
 });
 
 const ExerciseViewLatino = ({ item }) => {
@@ -56,58 +63,71 @@ const ExerciseViewLatino = ({ item }) => {
     top: styles.flexColReverse,
     bottom: styles.flexCol,
   };
+
+  const imgBoolean = item.imagePosition === 'top' || item.imagePosition === 'bottom';
+
   return (
     <View style={positionClassesMap[item.imagePosition] || styles.flexRow}>
-      <View>
-      {item.content
-      .trim()
-      .split(/\r?\n/)
-      ?.map((line, i) =>
-              line
-                .replace(/\t/g, ' ')
-                .trim()
-            )
-      ?.filter((line) => line !== '') 
-      ?.map((line, i) => (
-        <Text key={i} style={styles.content}>
-          {line}
-        </Text>
-      ))}
+      <View style={!imgBoolean && { flex: 1 }}>
+        {item.content
+          .trim()
+          .split(/\r?\n/)
+          ?.map((line, i) => line.replace(/\t/g, ' ').trim())
+          ?.filter((line) => line !== '')
+          ?.map((line, i) => (
+            <Text key={i} style={styles.content}>
+              {line}
+            </Text>
+          ))}
         <View style={styles.list}>
-        {item.questions.map((q) =>
-          q.question
-            .trim()
-            .split(/\r?\n/)
-            .map((line, i) =>
-              line
-                .replace(/\t/g, ' ')
-                .trim()
-            )
-            .filter((line) => line !== '') 
-            .map((line, i) => (
-              <Text key={`${q._id}-${i}`} style={styles.line}>
-                {line}
-              </Text>
-            ))
-        )}
+          {item.questions.map((q) =>
+            q.question
+              .trim()
+              .split(/\r?\n/)
+              .map((line, i) => line.replace(/\t/g, ' ').trim())
+              .filter((line) => line !== '')
+              .map((line, i) => (
+                <Text key={`${q._id}-${i}`} style={styles.line}>
+                  {line}
+                </Text>
+              ))
+          )}
         </View>
       </View>
-        {item.image && (
-          <View>
-            <Image
-              src={item.image}
-              style={!item.secondImage ? styles.image : styles.towImage}
-            />
-          </View>
-        )}
-        {item.secondImage && (
-          <View>
-            <Image
-              src={item.secondImage}
-              style={!item.image ? styles.image : styles.towImage}
-            />
-          </View>
-        )}
+     {(item.image || item.secondImage) && (
+      <View style={[styles.imageContainer,imgBoolean ? { width: '100%' } : { width: '50%' }]} break>
+          {item.image && (
+            <View
+              style={
+                item.image && item.secondImage
+                  ? styles.doubleImage
+                  : imgBoolean ? styles.singleImage :{ width: '100%' }
+              }
+            >
+              <Image
+                src={item.image}
+                alt={`Exercise illustration 1`}
+                style={styles.image}
+              />
+            </View>
+          )}
+          {item.secondImage && (
+            <View
+              style={
+                item.image && item.secondImage
+                  ? styles.doubleImage
+                  : imgBoolean ? styles.singleImage :{ width: '100%' }
+              }
+            >
+              <Image
+                src={item.secondImage}
+                alt={`Exercise illustration  2`}
+                style={styles.image}
+              />
+            </View>
+          )}
+        </View>
+       )}
     </View>
   );
 };

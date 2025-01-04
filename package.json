@@ -25,7 +25,7 @@
     "fs": "^0.0.1-security",
     "jspdf": "^2.5.2",
     "jwt-decode": "^4.0.0",
-    "katex": "^0.16.11",
+    "katex": "^0.16.19",
     "lucide-react": "^0.456.0",
     "multiselect-react-dropdown": "^2.0.25",
     "node-arabic": "^1.0.0",

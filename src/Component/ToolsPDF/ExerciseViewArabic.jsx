@@ -1,5 +1,5 @@
 import { Text, View, Image, StyleSheet } from '@react-pdf/renderer';
-
+import { renderTextWithLatex } from '../utils/renderTextWithLatex';
 const styles = StyleSheet.create({
   content: {
     fontSize: 12,
@@ -26,10 +26,6 @@ const styles = StyleSheet.create({
     direction: 'rtl',
     textAlign: 'right',
   },
-  image: {
-    marginHorizontal: 'auto',
-    resizeMode: 'contain',
-  },
   towImage: {
     width: '50%',
   },
@@ -47,8 +43,21 @@ const styles = StyleSheet.create({
   },
   flexColReverse: {
     flexDirection: 'column-reverse',
-    marginBottom: 10,
   },
+  imageContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    margin:5,
+  },
+  singleImage: {
+    width: '70%',
+    marginHorizontal: 'auto',
+  },
+  doubleImage: {
+    width: '50%',
+    marginVertical: 'auto',
+  },
+  image: {},
 });
 
 const ExerciseViewArabic = ({ item }) => {
@@ -60,10 +69,11 @@ const ExerciseViewArabic = ({ item }) => {
   };
 
   const imgBoolean = item.imagePosition === 'top' || item.imagePosition === 'bottom';
-
+  const content=`just an test for the text side $x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$`;
+ console.log(renderTextWithLatex(content))
   return (
     <View style={positionClassesMap[item.imagePosition] || styles.flexRow}>
-      <View style={[!imgBoolean && { flex: 1 }]}>
+      <View style={!imgBoolean && { flex: 1 }}>
         {item.content
           .trim()
           .split(/\r?\n/)
@@ -89,26 +99,40 @@ const ExerciseViewArabic = ({ item }) => {
           )}
         </View>
       </View>
-
-      {(item.image || item.secondImage) && (
-        <View style={[imgBoolean ? { width: '100%' } : { width: '50%' },{height: 'auto'},styles.flexRow]}>
+     {(item.image || item.secondImage) && (
+      <View style={[styles.imageContainer,imgBoolean ? { width: '100%' } : { width: '50%' }]} break>
           {item.image && (
-            <Image
-              src={item.image}
-              style={[!item.secondImage ? [styles.image, !imgBoolean ? { width: '100%' } : { width: '70%' }] : styles.towImage,{ height: 'auto' }]}
-              resizeMode="contain"
-              debug            
+            <View
+              style={
+                item.image && item.secondImage
+                  ? styles.doubleImage
+                  : imgBoolean ? styles.singleImage :{ width: '100%' }
+              }
+            >
+              <Image
+                src={item.image}
+                alt={`Exercise illustration 1`}
+                style={styles.image}
               />
+            </View>
           )}
           {item.secondImage && (
-            <Image
-              src={item.secondImage}
-              style={[!item.image ? [styles.image, !imgBoolean ? { width: '100%' } : { width: '70%' }]: styles.towImage,{ height: 'auto' }]}
-              resizeMode="contain"
-              debug/>
+            <View
+              style={
+                item.image && item.secondImage
+                  ? styles.doubleImage
+                  : imgBoolean ? styles.singleImage :{ width: '100%' }
+              }
+            >
+              <Image
+                src={item.secondImage}
+                alt={`Exercise illustration  2`}
+                style={styles.image}
+              />
+            </View>
           )}
         </View>
-      )}
+       )}
     </View>
   );
 };
