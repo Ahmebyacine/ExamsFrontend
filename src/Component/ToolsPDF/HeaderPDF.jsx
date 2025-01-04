@@ -4,13 +4,13 @@ import amiri from '../../Data/Tajwal.ttf';
 Font.register({
   family: 'Amiri',
   src: amiri,
+  format: "truetype",
 });
 
 
 const styles = StyleSheet.create({
   section: {
     paddingHorizontal: 10,
-    direction: 'rtl',
     fontFamily: 'Amiri',
     fontSize: 12,
     marginVertical:5,
@@ -33,14 +33,12 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     marginTop:15,
     textAlign: 'center',
-    direction: 'rtl',
     fontFamily: 'Amiri',
   },
   text: {
     fontSize: 12,
     textAlign: 'right',
     fontFamily: 'Amiri',
-    direction: 'rtl',
   },
   horizontalLine: {
     height: 1,

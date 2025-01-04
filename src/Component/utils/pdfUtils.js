@@ -1,7 +1,5 @@
 import {AmiriFont} from '../../Data/AmiriFont'
 
-
-
 export const generatePdfWithArabic = (pdf,year,level,matriel,trimester) => {
 
   // Add the font to jsPDF
@@ -23,7 +21,8 @@ export const generatePdfWithArabic = (pdf,year,level,matriel,trimester) => {
   pdf.line(10, 44, pageWidth - 10, 44);
   pdf.text(`اختبار في مادة:${matriel}`, pageWidth / 2, 50, { align: "center", lang: "ar" });
 
-  };
+};
+
 export const calculateImageDimensions = (imageSrc, targetWidth) => {
   const img = new Image();
   img.src = imageSrc;
@@ -52,7 +51,6 @@ export const addContentToPdf = (pdf, content, x, y, width, pageHeight,textAlign)
 
   return yPosition - y;
 };
-
 
 export const addQuestionsToPdf = (pdf, questions, x, y, width, pageHeight,textAlign) => {
   let yPosition = y; 
@@ -161,6 +159,7 @@ export const addImages = (pdf, contentItem, xOffset, yPosition, contentWidth, pa
 
   return yPosition;  
 };
+
 export const AddPageNumbers =(pdf)=>{
   const pageCount = pdf.getNumberOfPages();
 

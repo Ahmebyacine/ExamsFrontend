@@ -84,7 +84,6 @@ const ExamPdf = ({ exercises }) => {
                     />
                   </div>
                 </div>
-
                 <button
                   type="submit"
                   className="inline-flex items-center justify-center whitespace-nowrap rounded text-sm text-white font-medium ring-offset-background  bg-indigo-700 h-10"
@@ -95,8 +94,9 @@ const ExamPdf = ({ exercises }) => {
                   year={year} 
                   level={level} 
                   material={matriel} 
-                  trimester={trimester} />} 
-                  fileName="exam.pdf">
+                  trimester={trimester}/>} 
+                  fileName="exam.pdf"
+                  className="w-full">
                   {({ loading }) => (loading ? 'Loading document...' : 'Download Exam PDF')}
                   </PDFDownloadLink>
                 </button>

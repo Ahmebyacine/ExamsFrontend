@@ -147,7 +147,7 @@ const ExerciseCard = ({exercise,favexercises,setFavexercises,setAddedExercises, 
           <div>
             {exercise.exercise.map((item, itemIndex) => (
               <React.Fragment key={itemIndex}>
-                <ExerciseView key={itemIndex} item={item} itemIndex={itemIndex} />
+                <ExerciseView key={itemIndex} item={item} rtl={exercise.rtl} itemIndex={itemIndex} />
               </React.Fragment>
                 ))}
              <div className="bg-gray-300 rounded-md overflow-hidden">

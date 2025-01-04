@@ -1,8 +1,5 @@
-import React from 'react';
-import {isRTL} from '../utils/detectArabic';
-
-const ExerciseView = ({ item,itemIndex}) => {
-  const textDirection = isRTL(item.content) ? "rtl" : "ltr";
+const ExerciseView = ({ item,itemIndex,rtl}) => {
+  const textDirection = rtl ? "rtl" : "ltr";
   const positionClassesMap = {
     right: 'flex-row',
     left: 'flex-row-reverse',

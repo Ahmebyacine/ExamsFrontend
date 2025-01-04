@@ -43,7 +43,7 @@ const ExamCard = ({exam}) => {
         <div>
           {exercise.exercise.map((item, itemIndex) => (
             <React.Fragment key={itemIndex}>
-              <ExerciseView key={itemIndex} item={item} inExam={true} itemIndex={itemIndex} />
+              <ExerciseView key={itemIndex} item={item} rtl={exam.exerecise.rtl} itemIndex={itemIndex} />
             </React.Fragment>
               ))}
         </div>

@@ -1,5 +1,6 @@
 import ImageManager from "../../UI/ImageManager";
 import { useLanguage } from "../../utils/LanguageContext";
+import Switch from '@mui/material/Switch';
 
 const positionOptions = [
   { label: 'Left', value: 'left' },
@@ -129,14 +130,24 @@ const EditExercise = ({formData, setFormData }) => {
       exercise: updatedSections,
     }));
   };
+  const exerciseDirection = formData.rtl ?"rtl" : "ltr";
   return (
     <div key={formData._id} className="mx-8 my-10 py-8 bg-white rounded-lg">
       <form className="space-y-8">
+       <div className='flex items-center justify-between'>
+         <div>Arabic direction(Right to Left)</div>
+         <Switch
+           checked={formData.rtl}
+           onChange={(e) => handleChange('rtl', e.target.checked)}
+           inputProps={{ 'aria-label': 'controlled' }}
+          />
+        </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">{t("Title")}:</label>
           <input
             type="text"
             value={formData.title}
+            dir={exerciseDirection}
             onChange={(e) => handleChange('title', e.target.value)}
             className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
             placeholder="Enter content"
@@ -149,6 +160,7 @@ const EditExercise = ({formData, setFormData }) => {
               <label className="block text-sm font-medium text-gray-700 mb-2">{t("Content")}:</label>
               <textarea
                 value={section.content}
+                dir={exerciseDirection}
                 onChange={(e) => handleSectionChange(sectionIndex, 'content', e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                 rows="3"
@@ -162,6 +174,7 @@ const EditExercise = ({formData, setFormData }) => {
                   <label className="block text-sm font-medium text-gray-700 mb-2">{t("Question")} {questionIndex+1}:</label>
                   <textarea
                     value={q.question}
+                    dir={exerciseDirection}
                     onChange={(e) => handleQuestionChange(sectionIndex, questionIndex, 'question', e.target.value)}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                     rows="1"
@@ -172,6 +185,7 @@ const EditExercise = ({formData, setFormData }) => {
                   <label className="block text-sm font-medium text-gray-700 mb-2">{t("Answer")} {questionIndex+1}:</label>
                   <textarea
                     value={q.answer}
+                    dir={exerciseDirection}
                     onChange={(e) => handleQuestionChange(sectionIndex, questionIndex, 'answer', e.target.value)}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                     rows="1"

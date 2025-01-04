@@ -16,18 +16,19 @@ import FavoritesExercise from './User/FavoritesExercise';
 import CurrentExam from './User/CurrentExam';
 import ArchivedExams from './User/ArchivedExams';
 import { useLanguage } from "./utils/LanguageContext";
+
 const navItemsAdmin = [
-  { name: 'Exercises', link: '/ExamsFrontend', icon: Calendar },
-  { name: 'Levels', link: '/ExamsFrontend/levels', icon: ChartNoAxesGantt },
-  { name: 'Matriel', link: '/ExamsFrontend/matriel', icon: BookOpen },
-  { name: 'Unit', link: '/ExamsFrontend/unit', icon: Boxes },
-  { name: 'User', link: '/ExamsFrontend/users', icon: Users },
+  { name: 'Exercises', link: '/', icon: Calendar },
+  { name: 'Levels', link: '/levels', icon: ChartNoAxesGantt },
+  { name: 'Matriel', link: '/matriel', icon: BookOpen },
+  { name: 'Unit', link: '/unit', icon: Boxes },
+  { name: 'User', link: '/users', icon: Users },
 ];
 const navItemsUser = [
-  { name: 'Exercises', link: '/ExamsFrontend/user', icon: Calendar },
-  { name: 'Favorites_Exercise', link: '/ExamsFrontend/FavoritesExercise', icon: Heart },
-  { name: 'Current_Exam', link: '/ExamsFrontend/CurrentExam', icon: Plus },
-  { name: 'Archived_Exams', link: '/ExamsFrontend/ArchivedExams', icon: Archive  },
+  { name: 'Exercises', link: '/user', icon: Calendar },
+  { name: 'Favorites_Exercise', link: '/FavoritesExercise', icon: Heart },
+  { name: 'Current_Exam', link: '/CurrentExam', icon: Plus },
+  { name: 'Archived_Exams', link: '/ArchivedExams', icon: Archive  },
 ];
 
 const Dashboard = () => {

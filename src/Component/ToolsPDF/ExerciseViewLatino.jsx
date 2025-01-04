@@ -1,11 +1,9 @@
 import { Text, View, Image, StyleSheet } from '@react-pdf/renderer';
-import { isRTL } from '../utils/detectArabic';
 
 const styles = StyleSheet.create({
   content: {
     fontSize: 12,
     marginBottom: 10,
-    direction: 'rtl',
     fontFamily: 'Amiri',
     color: 'black',
     whiteSpace: 'pre-wrap',
@@ -13,26 +11,22 @@ const styles = StyleSheet.create({
   list: {
     marginLeft: 20,
     fontSize: 12,
-    direction: 'rtl',
     fontFamily: 'Amiri',
     whiteSpace: 'pre-wrap',
   },
   listItem: {
     marginBottom: 5,
-    direction: 'rtl',
     whiteSpace: 'pre-wrap',
   },
-  imageContainer: {
-    marginTop: 10,
-    marginBottom: 10,
-    width: '100%',
-    wrap: false,
+  line: {
+    fontFamily: 'Amiri',
+    fontSize: 12,
+    marginBottom: 5,
+    lineHeight: 1.6,
   },
   image: {
     width: '70%',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    objectFit: 'fill',
+    marginHorizontal: 'auto',
   },
   towImage: {
     width: '50%',
@@ -55,32 +49,49 @@ const styles = StyleSheet.create({
   },
 });
 
-const ExerciseView = ({ item }) => {
-  const textDirection = isRTL(item.content) ? 'rtl' : 'ltr';
+const ExerciseViewLatino = ({ item }) => {
   const positionClassesMap = {
     right: styles.flexRow,
     left: styles.flexRowReverse,
     top: styles.flexColReverse,
     bottom: styles.flexCol,
   };
-  const safeText = (text) => {
-    if (!text) return '';
-  return '\u200F' + text;
-  };
   return (
-    <View style={[positionClassesMap[item.imagePosition] || styles.flexRow, { direction: textDirection }]}>
+    <View style={positionClassesMap[item.imagePosition] || styles.flexRow}>
       <View>
-        <Text style={styles.content}>{safeText(item.content)}</Text>
+      {item.content
+      .trim()
+      .split(/\r?\n/)
+      ?.map((line, i) =>
+              line
+                .replace(/\t/g, ' ')
+                .trim()
+            )
+      ?.filter((line) => line !== '') 
+      ?.map((line, i) => (
+        <Text key={i} style={styles.content}>
+          {line}
+        </Text>
+      ))}
         <View style={styles.list}>
-          {item.questions.map((q) => (
-            <Text key={q._id} style={styles.listItem}>
-              {safeText(q.question)}
-            </Text>
-          ))}
+        {item.questions.map((q) =>
+          q.question
+            .trim()
+            .split(/\r?\n/)
+            .map((line, i) =>
+              line
+                .replace(/\t/g, ' ')
+                .trim()
+            )
+            .filter((line) => line !== '') 
+            .map((line, i) => (
+              <Text key={`${q._id}-${i}`} style={styles.line}>
+                {line}
+              </Text>
+            ))
+        )}
         </View>
       </View>
-
-      <View style={styles.imageContainer}>
         {item.image && (
           <View>
             <Image
@@ -97,9 +108,8 @@ const ExerciseView = ({ item }) => {
             />
           </View>
         )}
-      </View>
     </View>
   );
 };
 
-export default ExerciseView;
+export default ExerciseViewLatino;

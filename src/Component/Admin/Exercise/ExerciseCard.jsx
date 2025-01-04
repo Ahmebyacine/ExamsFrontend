@@ -129,7 +129,11 @@ const ExerciseCard = ({exercise, RenderComponent}) => {
                 <div>
                   {originalData.exercise.map((item, itemIndex) => (
                     <>
-                    <ExerciseView key={itemIndex} item={item} itemIndex={itemIndex} />
+                    <ExerciseView 
+                    key={itemIndex} 
+                    item={item} 
+                    itemIndex={itemIndex} 
+                    rtl={originalData.rtl}/>
                     </>
                   ))}
                   <div className="bg-gray-300 rounded-md overflow-hidden">

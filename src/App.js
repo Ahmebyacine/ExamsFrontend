@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter , Routes, Route, Navigate } from 'react-router-dom';
 import Login from './Component/Auth/Login';
 import Signup from './Component/Auth/signup';
 import Dashboard from './Component/Dashboard';
@@ -15,12 +15,12 @@ const PrivateRoute = ({ children }) => {
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route
-          path="/ExamsFrontend/*"
+          path="/*"
           element={
             <PrivateRoute>
               <Dashboard />
@@ -30,7 +30,7 @@ function App() {
         <Route path="/unauthorized" element={<Unauthorized />} />
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 

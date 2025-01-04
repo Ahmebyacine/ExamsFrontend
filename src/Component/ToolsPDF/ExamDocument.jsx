@@ -1,24 +1,23 @@
 import React from 'react';
 import { Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
 import HeaderPDF from './HeaderPDF';
-import ExerciseView from './ExerciseViewPDF';
+import ExerciseViewArabic from './ExerciseViewArabic';
+import ExerciseViewLatino from './ExerciseViewLatino';
 
 const styles = StyleSheet.create({
   page: {
     padding: 15,
-    textAlign: 'right',
     display: 'flex',
     flexDirection: 'column',
     border: '2px solid black',
   },
   section: {
-    padding: 5,
+    paddingTop: 5,
     flexGrow: 1,
   },
   title: {
-    margin:15,
+    margin:5,
     fontSize: 14,
-    direction: 'rtl',
     fontFamily: 'Amiri',
     fontWeight: 'semibold',
     marginBottom: 10,
@@ -32,7 +31,6 @@ const styles = StyleSheet.create({
     fontSize: 10,
   },
 });
-
 const ExamDocument = ({ exam ,year, level, material, trimester  }) => {
   
 return(
@@ -42,13 +40,26 @@ return(
       {exam?.map((exercise, i) => (
         <>
         <View key={exercise._id} style={styles.section}>
-          <Text style={styles.title}>{`التمرين${i + 1}:`}</Text>
+        {exercise.rtl ? (
+           <Text style={[styles.title,{textAlign: 'right', direction:'rtl'}]}>{`التمرين ${i + 1}:`}</Text>
+         ) : (
+           <Text style={styles.title}>{`Exercise ${i + 1}:`}</Text>
+         )}
           <View>
             {exercise?.exercise?.map((item, itemIndex) => (
-              <ExerciseView 
-              key={item._id} 
-              item={item} 
-              itemIndex={itemIndex}/>
+                exercise.rtl ? (
+                  <ExerciseViewArabic
+                    key={item._id} 
+                    item={item} 
+                    itemIndex={itemIndex}
+                  />
+                ) : (
+                  <ExerciseViewLatino
+                    key={item._id} 
+                    item={item} 
+                    itemIndex={itemIndex}
+                  />
+                )
             ))}
           </View>
         </View>

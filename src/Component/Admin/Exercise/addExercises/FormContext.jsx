@@ -22,6 +22,7 @@ export const FormProvider = ({ children }) => {
     material: '',
     unit: '',
     difficulty: '1',
+    rtl:false,
   });
 
   // sections state moved here

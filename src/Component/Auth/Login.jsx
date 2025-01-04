@@ -22,9 +22,9 @@ const Login = () => {
       const tokenPayload = getTokenPayload();
       const userRole = tokenPayload?.role;
       if (userRole === 'admin') {
-        navigate('/ExamsFrontend');
+        navigate('/');
       } else {
-        navigate('/ExamsFrontend/user');
+        navigate('/user');
       }
     } catch (err) {
         setError(

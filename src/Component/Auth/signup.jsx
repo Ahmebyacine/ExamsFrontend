@@ -29,7 +29,7 @@ const Signup = () => {
       const response=await api.post(`/api/auth/signup`, { name,email, password,phone,levels:selectedLevels,matirels:selectedMatriels });
       const { token } = response.data;
       localStorage.setItem('token', token);
-      navigate('/ExamsFrontend/user');
+      navigate('/user');
     } catch (err) {
         setError(
             err.response?.data?.message || 'Something went wrong. Please try again.'

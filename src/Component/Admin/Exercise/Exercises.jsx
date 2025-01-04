@@ -34,7 +34,7 @@ export default function Exercises() {
     refetch,
   } = useFetchData();
 
-  const goToAddExercise = () => navigate("/ExamsFrontend/addExercise");
+  const goToAddExercise = () => navigate("/addExercise");
 
   const handleFilterChange = (filterType, value) => {
     setSelectedFilters((prevFilters) => ({
