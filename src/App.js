@@ -1,9 +1,8 @@
-import React from 'react';
 import { HashRouter , Routes, Route, Navigate } from 'react-router-dom';
-import Login from './Component/Auth/Login';
-import Signup from './Component/Auth/signup';
-import Dashboard from './Component/Dashboard';
-import Unauthorized from './Component/UI/Unauthorized';
+import Login from './Pages/Auth/Login';
+import Signup from './Pages/Auth/signup';
+import Dashboard from './Routes/Dashboard';
+import Unauthorized from './Component/Unauthorized';
 
 const isAuthenticated = () => {
   return localStorage.getItem('token') !== null;
